@@ -1,0 +1,5 @@
+wc
+wc.o
+.dub
+.DS_Store
+wc.c
