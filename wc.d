@@ -1,5 +1,5 @@
 #!/usr/bin/env rdmd
-import std.stdio;
+import std.stdio : std, File, writeln, writefln, stdin, writef;
 import std.algorithm : max;
 import std.string : format;
 import std.getopt : getopt;
