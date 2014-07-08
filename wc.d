@@ -102,32 +102,27 @@ counts wc(ref File f, options opts)
   counts cnts;
   cnts.cc = f.size;
 
-  if (cnts.cc < 10_000_000) {
-    if (!opts.lines && !opts.chars && !opts.words) return cnts;
-    foreach (l; f.byLine()) {
-      cnts.lc++;
+  if (!opts.lines && !opts.chars && !opts.words) return cnts;
+  foreach (l; f.byLine()) {
+    cnts.lc++;
 
-      auto inword = false;
-      foreach (j, c; l) {
-        switch (c) {
-          case '\t':
-          case '\r':
-          case '\f':
-          case '\v':
-          case ' ':
-            cnts.wc += inword;
-            inword = false;
-            break;
-          default:
-            inword = true;
-            if (j == l.length - 1) cnts.wc++;
-            break;
-        }
+    auto inword = false;
+    foreach (j, c; l) {
+      switch (c) {
+        case '\t':
+        case '\r':
+        case '\f':
+        case '\v':
+        case ' ':
+          cnts.wc += inword;
+          inword = false;
+          break;
+        default:
+          inword = true;
+          if (j == l.length - 1) cnts.wc++;
+          break;
       }
     }
-  }
-  else {
-    //auto b = new BufferedFile(f); <- this gives me an error; are the docs wrong?
   }
 
   return cnts;
